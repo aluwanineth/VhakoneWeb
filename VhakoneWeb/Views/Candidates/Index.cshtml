@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewBag.Title = "Candidate Info";
+}
+
+
+
+<div id="exTab2" class="container">
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a href="#1" data-toggle="tab">Personal Details</a>
+        </li>
+        <li>
+            <a href="#2" data-toggle="tab">Contact Details</a>
+        </li>
+        <li>
+            <a href="#3" data-toggle="tab">Qualifications</a>
+        </li>
+        <li>
+            <a href="#4" data-toggle="tab">Skills</a>
+        </li>
+        <li>
+            <a href="#5" data-toggle="tab">Reference</a>
+        </li>
+        <li>
+            <a href="#6" data-toggle="tab">Documents</a>
+        </li>
+    </ul>
+
+    <div class="tab-content ">
+        <div class="tab-pane active" id="1">
+            @if (ViewBag.isCreated)
+            {
+                Html.RenderPartial("_CreatePersonalDetail");
+            }
+            else
+            {
+                Html.RenderPartial("_EditPersonalDetail");
+            }
+        </div>
+        <div class="tab-pane" id="2">
+            <h3>Notice the gap between the content and tab after applying a background color</h3>
+        </div>
+        <div class="tab-pane" id="3">
+            <h3>add clearfix to tab-content (see the css)</h3>
+        </div>
+    </div>
+</div>
+
+
+<!-- Bootstrap core JavaScript
+    ================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+
+
+
+
