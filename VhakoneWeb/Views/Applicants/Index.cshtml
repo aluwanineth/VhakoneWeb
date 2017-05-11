@@ -1,0 +1,208 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<script src="~/Scripts/angular.js"></script>
+<script src="~/Scripts/AngularCode.js"></script>
+<style>
+    .btn-space {
+        margin-left: -5%;
+        background-color: cornflowerblue;
+        font-size: large;
+    }
+</style>
+<h2>Index</h2>
+<div ng-app="myApp">
+    <div ng-controller="myCtrl" ng-init="GetAllData()" class="divList">
+        <div id="exTab2" class="container">
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a href="#1" data-toggle="tab">Personal Details</a>
+                </li>
+                <li>
+                    <a href="#2" data-toggle="tab">Contact Details</a>
+                </li>
+                <li>
+                    <a href="#3" data-toggle="tab">Qualifications</a>
+                </li>
+                <li>
+                    <a href="#4" data-toggle="tab">Skills</a>
+                </li>
+                <li>
+                    <a href="#5" data-toggle="tab">Reference</a>
+                </li>
+                <li>
+                    <a href="#6" data-toggle="tab">Documents</a>
+                </li>
+            </ul>
+
+            <div class="tab-content ">
+                <div class="tab-pane active" id="1">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Personal Details</div>
+                        <div class="panel-body">
+                            @if (ViewBag.canCreate == true)
+                            {
+
+                                <input type="button" class="btn btn-default" value="Create" data-toggle="modal" data-target="#createForm" ng-click="UpdateEmp(Emp)" />
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="createForm" role="dialog">
+                                    <div class="modal-dialog">
+
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title">Create Personal Detail</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="form-horizontal" role="form">
+                                                    <div class="container">
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-2"for="Title">Title:</label>
+                                                            <div class="col-md-10">
+                                                                
+                                                                    <select class="form-control" id="Title" ng-model="Title">
+                                                                        <option value="Mr">Mr</option>
+                                                                        <option value="Mrs">Mrs</option>
+                                                                        <option value="Ms">Ms</option>
+                                                                        <option value="Dr">Dr</option>
+                                                                    </select>
+                                                                
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-2" for="FirstName">First Name:</label>
+                                                            <div class="col-md-10">
+                                                                <input type="text" class="form-control" id="FirstName" placeholder="Title" ng-model="FirstName">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-2" for="LastName">Surname:</label>
+                                                            <div class="col-md-10">
+                                                                <input type="text" class="form-control" id="LastName" placeholder="Title" ng-model="LastName">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-2" for="Gender">Gender:</label>
+                                                            <div class="col-md-10">
+                                                                <select class="form-control" id="Gender" ng-model="Gender">
+                                                                    <option value="Male">Male</option>
+                                                                    <option value="Female">Female</option>
+
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-2" for="DateOfBith">Date Of Birth:</label>
+                                                            <div class="col-md-10">
+                                                                <input type="date" class="form-control" id="DateOfBith" placeholder="Title" ng-model="DateOfBith">
+                                                            </div>
+                                                        </div>
+
+                                                        
+
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-2" for="IdNumber">ID / Passport Number:</label>
+                                                            <div class="col-md-10">
+                                                                <input type="text" class="form-control" id="IdNumber" placeholder="Id Number" ng-model="IdNumber">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-2" for="Disable">Disable?:</label>
+                                                            <div class="col-md-10">
+                                                                <input type="checkbox" id="Disable" ng-model="Disable" ng-true-value="true" ng-false-value="false">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <div class="col-md-offset-2 col-md-10">
+                                                                <input type="submit" value="Create" ng-click="CreatePersonalDetail()"class="btn btn-default" />
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            }
+                            else if (ViewBag.canCreate == true)
+                            {
+                                <table cellpadding="12" class="table table-bordered table-hover">
+                                    <tr>
+                                        <td>
+                                            <b>Title</b>
+                                        </td>
+                                        <td>
+                                            <b>First Name</b>
+                                        </td>
+                                        <td>
+                                            <b>Surname</b>
+                                        </td>
+                                        <td>
+                                            <b>Gender</b>
+                                        </td>
+                                        <td>
+                                            <b>Date Of Birth</b>
+                                        </td>
+                                        <td>
+                                            <b>ID / Passport Number</b>
+                                        </td>
+                                    </tr>
+                                    <tr ng-repeat="PersonalDetail in personalDetails">
+                                        <td>
+                                            {{PersonalDetail.Title}}
+                                        </td>
+                                        <td>
+                                            {{PersonalDetail.FirstName}}
+                                        </td>
+                                        <td>
+                                            {{PersonalDetail.LastName}}
+                                        </td>
+                                        <td>
+                                            {{PersonalDetail.Gender}}
+                                        </td>
+                                        <td>
+                                            {{PersonalDetail.DateOfBirth}}
+                                        </td>
+                                        <td>
+                                            {{PersonalDetail.IdNumber}}
+                                        </td>
+                                        <td>
+                                            <input type="button" class="btn btn-warning" value="Update" ng-click="UpdateEmp(Emp)" />
+                                            <input type="button" class="btn btn-danger" value="Delete" ng-click="DeleteEmp(Emp)" />
+                                        </td>
+                                    </tr>
+                                </table>
+                            }
+                        </div>
+                        <div class="panel-footer">Panel Footer</div>
+                    </div>
+                </div>
+                <div class="tab-pane" id="2">
+                    <h3>Notice the gap between the content and tab after applying a background color</h3>
+                </div>
+                <div class="tab-pane" id="3">
+                    <h3>add clearfix to tab-content (see the css)</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
