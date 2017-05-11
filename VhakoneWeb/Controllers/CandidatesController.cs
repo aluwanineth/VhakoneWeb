@@ -33,10 +33,23 @@ namespace VhakoneWeb.Controllers
                 else
                 {
                     ViewBag.IsCreate = false;
-                    return PartialView("_EditPersonalDetail",personalDetail);
+                    return View(personalDetail);
                 }
             }
             return View();
-        }      
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit([Bind(Include = "Id,FirstName,LastName,Title,DateOfBirth,IdNumber,Gender,Disable,UserId")] PersonalDetail personalDetail)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(personalDetail).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            return View(personalDetail);
+        }
     }
 }

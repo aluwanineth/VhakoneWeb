@@ -1,7 +1,7 @@
 ﻿@model VhakoneWeb.Models.PersonalDetail
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "Candidate", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     

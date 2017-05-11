@@ -29,13 +29,14 @@
 
     <div class="tab-content ">
         <div class="tab-pane active" id="1">
-            @if (ViewBag.isCreated)
+            @if (ViewBag.IsCreate == true)
             {
                 Html.RenderPartial("_CreatePersonalDetail");
             }
-            else
+            else if (ViewBag.IsCreate == false)
             {
                 Html.RenderPartial("_EditPersonalDetail");
+                
             }
         </div>
         <div class="tab-pane" id="2">
