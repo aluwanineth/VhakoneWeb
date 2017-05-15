@@ -25,6 +25,8 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <ApplicationInsightsResourceId>/subscriptions/27e04676-66ed-4126-96c4-b83bb601770b/resourcegroups/Default-ApplicationInsights-EastUS/providers/microsoft.insights/components/VhakoneWeb</ApplicationInsightsResourceId>
+    <ApplicationInsightsAnnotationResourceId>/subscriptions/27e04676-66ed-4126-96c4-b83bb601770b/resourcegroups/Default-ApplicationInsights-EastUS/providers/microsoft.insights/components/VhakoneWeb</ApplicationInsightsAnnotationResourceId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -68,6 +70,9 @@
     </Reference>
     <Reference Include="Microsoft.ApplicationInsights, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.2.3.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights.TraceListener, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.TraceListener.2.2.0\lib\net45\Microsoft.ApplicationInsights.TraceListener.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.4\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
@@ -192,6 +197,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PersonalDetailsController.cs" />
+    <Compile Include="ErrorHandler\AiHandleErrorAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -247,6 +253,7 @@
     <Content Include="Scripts\angular-touch.min.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\AngularCode - Copy.js" />
     <Content Include="Scripts\AngularCode.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -274,6 +281,8 @@
     <Content Include="Scripts\angular-cookies.min.js.map" />
     <Content Include="Scripts\angular-aria.min.js.map" />
     <Content Include="Scripts\angular-animate.min.js.map" />
+    <Content Include="Connected Services\Application Insights\ConnectedService.json" />
+    <None Include="Properties\PublishProfiles\VhakoneWeb20170512080521 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\i18n\angular-locale_af-na.js" />
@@ -1082,6 +1091,9 @@
     <EmbeddedResource Include="Migrations\201705110644267_InitialCreate1.resx">
       <DependentUpon>201705110644267_InitialCreate1.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

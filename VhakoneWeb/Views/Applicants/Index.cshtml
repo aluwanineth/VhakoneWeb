@@ -13,7 +13,7 @@
 </style>
 <h2>Index</h2>
 <div ng-app="myApp">
-    <div ng-controller="myCtrl" ng-init="GetAllData()" class="divList">
+    <div ng-controller="myCtrl" class="divList">
         <div id="exTab2" class="container">
             <ul class="nav nav-tabs">
                 <li class="active">
@@ -101,7 +101,7 @@
                                                         <div class="form-group">
                                                             <label class="control-label col-md-2" for="DateOfBith">Date Of Birth:</label>
                                                             <div class="col-md-10">
-                                                                <input type="date" class="form-control" id="DateOfBith" placeholder="Title" ng-model="DateOfBith">
+                                                                <input type="date" class="form-control" id="DateOfBith" placeholder="Date Of Bith" value="{{ date | date: 'yyyy-MM-dd' }}" ng-model="DateOfBirth">
                                                             </div>
                                                         </div>
 
@@ -139,53 +139,31 @@
                                 </div>
 
                             }
-                            else if (ViewBag.canCreate == true)
+                            else if (ViewBag.canCreate == false)
                             {
                                 <table cellpadding="12" class="table table-bordered table-hover">
                                     <tr>
-                                        <td>
-                                            <b>Title</b>
-                                        </td>
-                                        <td>
-                                            <b>First Name</b>
-                                        </td>
-                                        <td>
-                                            <b>Surname</b>
-                                        </td>
-                                        <td>
-                                            <b>Gender</b>
-                                        </td>
-                                        <td>
-                                            <b>Date Of Birth</b>
-                                        </td>
-                                        <td>
-                                            <b>ID / Passport Number</b>
-                                        </td>
+                                        <th>Title</th>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>Date Of Birth</th>
+                                        <th>ID Number</th>
+                                        <th>Gender</th>
+                                        <th>Disable?</th>
                                     </tr>
-                                    <tr ng-repeat="PersonalDetail in personalDetails">
-                                        <td>
-                                            {{PersonalDetail.Title}}
-                                        </td>
-                                        <td>
-                                            {{PersonalDetail.FirstName}}
-                                        </td>
-                                        <td>
-                                            {{PersonalDetail.LastName}}
-                                        </td>
-                                        <td>
-                                            {{PersonalDetail.Gender}}
-                                        </td>
-                                        <td>
-                                            {{PersonalDetail.DateOfBirth}}
-                                        </td>
-                                        <td>
-                                            {{PersonalDetail.IdNumber}}
-                                        </td>
+                                    <tr ng-repeat="person in personalDetails">
+                                        <td>{{person.Title}}</td>
+                                        <td>{{person.FirstName}}</td>
+                                        <td>{{person.LastName}}</td>
+                                        <td>{{person.DateOfBirth}}</td>
+                                        <td>{{person.IdNumber}}</td>
+                                        <td>{{person.Gender}}</td>
+                                        <td>{{person.Disable}}</td>
                                         <td>
                                             <input type="button" class="btn btn-warning" value="Update" ng-click="UpdateEmp(Emp)" />
                                             <input type="button" class="btn btn-danger" value="Delete" ng-click="DeleteEmp(Emp)" />
                                         </td>
-                                    </tr>
+                                     </tr>
                                 </table>
                             }
                         </div>

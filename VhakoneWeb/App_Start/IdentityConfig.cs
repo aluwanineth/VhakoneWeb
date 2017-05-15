@@ -11,6 +11,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using VhakoneWeb.Models;
+using System.Net.Mail;
+using System.Net;
 
 namespace VhakoneWeb
 {
@@ -18,8 +20,87 @@ namespace VhakoneWeb
     {
         public Task SendAsync(IdentityMessage message)
         {
-            // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            return configSendGridasync(message);
+        }
+        private Task configSendGridasync(IdentityMessage message)
+        {
+            var smtp = new System.Net.Mail.SmtpClient();
+            var mail = new System.Net.Mail.MailMessage();
+
+            mail.IsBodyHtml = true;
+            mail.From = new System.Net.Mail.MailAddress("registration@vhakone.co.za", "registration Mail");
+            mail.To.Add(message.Destination);
+            mail.Subject = message.Subject;
+            mail.Body = message.Body;
+
+            smtp.Timeout = 1000;
+            smtp.Credentials = new NetworkCredential("registration@vhakone.co.za", "P@$$w0rd");
+            smtp.Port = 25;
+            smtp.Host = "curry.aserv.co.za";
+            smtp.EnableSsl = true;
+            var t = Task.Run(() => smtp.SendAsync(mail, null));
+
+            return t;
+            //    var from = new MailAddress("career@vhakone.co.za");
+            //    var to = new MailAddress(message.Destination);
+
+            //    var useDefaultCredentials = false;
+            //    var enableSsl = false;
+            //    var replyto = "registration@vhakone.co.za"; // set here your email; 
+            //    var userName = string.Empty;
+            //    var password = string.Empty;
+            //    var port = 25;
+            //    var host = "curry.aserv.co.za";
+
+            //    userName = "registration@vhakone.co.za"; // setup here the username; 
+            //    password = "P@$$w0rd"; // setup here the password; 
+            //   /* bool.TryParse("true", out useDefaultCredentials); //setup here if it uses defaault credentials 
+            //    bool.TryParse("true", out enableSsl); //setup here if it uses ssl 
+            //    int.TryParse("465", out port); //setup here the port 
+            //    host = "curry.aserv.co.za"; //setup here the host */
+
+            //    using (var mail = new MailMessage(from, to))
+            //    {
+            //        mail.Subject = message.Subject;
+            //        mail.Body = message.Body;
+            //        mail.IsBodyHtml = true;
+
+            //        mail.ReplyToList.Add(new MailAddress(replyto, "Registration"));
+            //        mail.ReplyToList.Add(from);
+            //        mail.DeliveryNotificationOptions = DeliveryNotificationOptions.Delay |
+            //                                           DeliveryNotificationOptions.OnFailure |
+            //                                           DeliveryNotificationOptions.OnSuccess;
+
+            //        using (var client = new SmtpClient())
+            //        {
+            //            client.Host = host;
+            //            client.EnableSsl = enableSsl;
+            //            client.Port = port;
+            //            client.UseDefaultCredentials = useDefaultCredentials;
+
+            //            if (!client.UseDefaultCredentials && !string.IsNullOrEmpty(userName) &&
+            //                !string.IsNullOrEmpty(password))
+            //            {
+            //                client.Credentials = new NetworkCredential(userName, password);
+            //            }
+
+
+            //            if (client.Credentials != null)
+            //            {
+            //                client.Timeout = 1000;
+
+            //                var t = Task.Run(() => client.SendAsync(mail, null));
+
+            //                return t;
+
+            //                //return client.SendMailAsync(mail);
+            //            }
+            //            else
+            //            {
+            //                return Task.FromResult(0);
+            //            }
+            //        }
+            //    }
         }
     }
 

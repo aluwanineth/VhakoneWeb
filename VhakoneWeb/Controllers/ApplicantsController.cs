@@ -32,8 +32,12 @@ namespace VhakoneWeb.Controllers
         public JsonResult GetApplicant()
         { 
             var  userId = User.Identity.GetUserId();
-            PersonalDetail personalDetails = db.PersonalDetails.FirstOrDefault(x => x.UserId == userId);
-            return Json(personalDetails, JsonRequestBehavior.AllowGet);
+            // PersonalDetail personalDetails = db.PersonalDetails.FirstOrDefault(x => x.UserId == userId);
+            List<PersonalDetail> personalDetails = db.PersonalDetails.ToList();
+            var query = from a in personalDetails
+                        where a.UserId == userId
+                        select a;
+            return Json(query.ToList(), JsonRequestBehavior.AllowGet);
         
         }
 
